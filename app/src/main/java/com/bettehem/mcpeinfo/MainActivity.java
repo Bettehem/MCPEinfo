@@ -22,11 +22,24 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
 
     Toolbar toolbar;
+
+    //temporary values
+    SharedPreferencesSavingAndLoading.Saving saving;
+    SharedPreferencesSavingAndLoading.Loading loading;
+    SharedPreferencesSavingAndLoading.Deleting deleting;
+    TextView textView;
+    EditText valueNameInput, valueInput;
+    Button save, load, clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +52,46 @@ public class MainActivity extends ActionBarActivity {
 
     public void variables(){
         toolbars();
+
+        //temporary
+        temporaryVariables();
+    }
+
+    public void temporaryVariables(){
+        textView = (TextView) findViewById(R.id.textView);
+        valueNameInput = (EditText) findViewById(R.id.editText);
+        valueInput = (EditText) findViewById(R.id.editText2);
+        save = (Button) findViewById(R.id.button2);
+        load = (Button) findViewById(R.id.button);
+        clear = (Button) findViewById(R.id.button3);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String valueName = valueNameInput.getText().toString();
+                String value = valueInput.getText().toString();
+                saving.saveString(getApplicationContext(), valueName, value);
+                Toast.makeText(getApplicationContext(), "Value has been saved!", Toast.LENGTH_SHORT).show();
+                textView.setText("");
+            }
+        });
+
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String valueName = valueNameInput.getText().toString();
+                String loadedValue;
+                loadedValue = loading.loadString(getApplicationContext(), valueName);
+                textView.setText(loadedValue);
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleting.deleteAllValues(getApplicationContext());
+                Toast.makeText(getApplicationContext(), "Values have been deleted!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void toolbars(){

@@ -25,12 +25,13 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private String preferenceFilename = "Settings";
 
 
     public class Saving{
 
         public void saveString(Context context,String valueName, String value){
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
             editor = sharedPreferences.edit();
 
             editor.putString(valueName, value);
@@ -39,9 +40,8 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
         }
 
-
         public void saveInt(Context context,String valueName, int value){
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
             editor = sharedPreferences.edit();
 
             editor.putInt(valueName, value);
@@ -51,7 +51,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
         }
 
         public void saveBoolean(Context context,String valueName, boolean value){
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
             editor = sharedPreferences.edit();
 
             editor.putBoolean(valueName, value);
@@ -61,7 +61,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
         }
 
         public void saveFloat(Context context,String valueName, float value){
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
             editor = sharedPreferences.edit();
 
             editor.putFloat(valueName, value);
@@ -71,7 +71,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
         }
 
         public void saveLong(Context context,String valueName, long value){
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
             editor = sharedPreferences.edit();
 
             editor.putLong(valueName, value);
@@ -87,7 +87,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
         public String loadString(Context context, String valueName){
 
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
             String loadedValue, defaultvalue;
 
@@ -100,7 +100,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
         public int loadInt(Context context, String valueName){
 
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
             int loadedValue, defaultvalue;
 
@@ -113,7 +113,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
         public boolean loadBoolean(Context context, String valueName){
 
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
             boolean loadedValue, defaultvalue;
 
@@ -126,7 +126,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
         public float loadFloat(Context context, String valueName){
 
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
             float loadedValue, defaultvalue;
 
@@ -139,7 +139,7 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
         public long loadLong(Context context, String valueName){
 
-            sharedPreferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
             long loadedValue, defaultvalue;
 
@@ -148,6 +148,28 @@ public class SharedPreferencesSavingAndLoading extends Activity{
             loadedValue = sharedPreferences.getLong(valueName, defaultvalue);
 
             return loadedValue;
+        }
+
+    }
+
+    public class Deleting{
+
+        public void deleteIndividualValue(Context context, String valueName){
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+
+            editor.remove(valueName);
+
+            editor.apply();
+        }
+
+        public void deleteAllValues(Context context){
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+
+            editor.clear();
+
+            editor.apply();
         }
 
     }

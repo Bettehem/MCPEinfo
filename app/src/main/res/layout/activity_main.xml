@@ -25,4 +25,52 @@
     <include layout="@layout/app_bar"
         android:id="@+id/app_bar"/>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_below="@+id/app_bar"
+        android:layout_centerHorizontal="true"
+        android:hint="valueName"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true"
+        android:hint="value"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load"
+        android:id="@+id/button"
+        android:layout_below="@+id/editText2"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/button2"
+        android:layout_below="@+id/editText2"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/textView"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear all values"
+        android:id="@+id/button3"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
