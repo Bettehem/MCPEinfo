@@ -23,12 +23,10 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesSavingAndLoading extends Activity{
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private String preferenceFilename = "Settings";
+    public SharedPreferences sharedPreferences;
+    public SharedPreferences.Editor editor;
+    public String preferenceFilename = "Settings";
 
-
-    public class Saving{
 
         public void saveString(Context context,String valueName, String value){
             sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
@@ -80,79 +78,71 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
         }
 
-    }
-
-
-    public class Loading{
-
         public String loadString(Context context, String valueName){
 
-            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+			if (valueName != null){
+            	sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
-            String loadedValue, defaultvalue;
+            	String loadedStringValue;
+            	loadedStringValue = sharedPreferences.getString(valueName, "getString(R.string.shared_preferences_loading_error)");
 
-            defaultvalue = getString(R.string.shared_preferences_loading_error);
-
-            loadedValue = sharedPreferences.getString(valueName, defaultvalue);
-
-            return loadedValue;
+            	return loadedStringValue;
+			}else{
+				return "getString(R.string.shared_preferences_key_loading_error)";
+			}
         }
 
         public int loadInt(Context context, String valueName){
 
             sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
-            int loadedValue, defaultvalue;
+            int loadedIntValue, defaultvalue;
 
             defaultvalue = 0;
 
-            loadedValue = sharedPreferences.getInt(valueName, defaultvalue);
+            loadedIntValue = sharedPreferences.getInt(valueName, defaultvalue);
 
-            return loadedValue;
+            return loadedIntValue;
         }
 
         public boolean loadBoolean(Context context, String valueName){
 
             sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
-            boolean loadedValue, defaultvalue;
+            boolean loadedBooleanValue, defaultvalue;
 
             defaultvalue = false;
 
-            loadedValue = sharedPreferences.getBoolean(valueName, defaultvalue);
+            loadedBooleanValue = sharedPreferences.getBoolean(valueName, defaultvalue);
 
-            return loadedValue;
+            return loadedBooleanValue;
         }
 
         public float loadFloat(Context context, String valueName){
 
             sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
-            float loadedValue, defaultvalue;
+            float loadedFloatValue, defaultvalue;
 
             defaultvalue = 0;
 
-            loadedValue = sharedPreferences.getFloat(valueName, defaultvalue);
+            loadedFloatValue = sharedPreferences.getFloat(valueName, defaultvalue);
 
-            return loadedValue;
+            return loadedFloatValue;
         }
 
         public long loadLong(Context context, String valueName){
 
             sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
 
-            long loadedValue, defaultvalue;
+            long loadedLongValue, defaultvalue;
 
             defaultvalue = 0;
 
-            loadedValue = sharedPreferences.getLong(valueName, defaultvalue);
+            loadedLongValue = sharedPreferences.getLong(valueName, defaultvalue);
 
-            return loadedValue;
+            return loadedLongValue;
         }
-
-    }
-
-    public class Deleting{
 
         public void deleteIndividualValue(Context context, String valueName){
             sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
@@ -171,7 +161,5 @@ public class SharedPreferencesSavingAndLoading extends Activity{
 
             editor.apply();
         }
-
-    }
 
 }
