@@ -17,6 +17,8 @@ package com.bettehem.mcpeinfo;
     along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 
+
+//Imports used for this class
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,18 +31,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
+// implements View.OnClickListener so that the clicks can be handled in a separate onClick method, if needed.
 public class MainActivity extends ActionBarActivity implements View.OnClickListener
 {
+    //Variables are first created here.
     Toolbar toolbar;
 
     //temporary values
 	SharedPreferencesSavingAndLoading savingAndLoading = new SharedPreferencesSavingAndLoading();
-    //SharedPreferencesSavingAndLoading.Saving saving;
-    //SharedPreferencesSavingAndLoading.Loading loading;
-    //SharedPreferencesSavingAndLoading.Deleting deleting;
     TextView textView;
     EditText valueNameInput, valueInput;
     Button save, load, clear;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
 
+    //Variables are categorized based on the type in to separate methods, to keep everything easy to find.
     public void variables(){
         toolbars();
 
@@ -72,6 +76,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         clear.setOnClickListener(this);
     }
 
+    //Variables related to the Toolbar are defined here.
     public void toolbars(){
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -79,6 +84,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
 
+    //Inflates the options menu from the corresponding menu .xml file
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -86,6 +92,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return true;
     }
 
+
+    //Handles the item clicks on the menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -100,12 +108,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
-	
+
+
+    //Handles clicks on buttons for example.
 	@Override
-	public void onClick(View p1)
+	public void onClick(View v)
 	{
-		String valueName = "";
-		switch (p1.getId()){
+		String valueName;
+		switch (v.getId()){
 			case R.id.button2:
 				valueName = valueNameInput.getText().toString();
                 String value = valueInput.getText().toString();
@@ -115,7 +125,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 				break;
 			case R.id.button:
 				valueName = valueNameInput.getText().toString();
-                String loadedValue = "";
+                String loadedValue;
                 loadedValue = savingAndLoading.loadString(this, valueName);
                 textView.setText(loadedValue);
 				break;
